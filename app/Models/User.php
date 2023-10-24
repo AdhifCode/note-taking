@@ -22,7 +22,7 @@ class User extends Model implements AuthenticatableContract, AuthorizableContrac
     protected $table = 'users';
     protected $primaryKey = 'id';
     protected $fillable = [
-        'nama', 'email', 'sandi'
+        'nama', 'email', 'password'
     ];
 
     /**
@@ -31,16 +31,9 @@ class User extends Model implements AuthenticatableContract, AuthorizableContrac
      * @var string[]
      */
     protected $hidden = [
-        'sandi',
+        'password',
     ];
-    public function getAuthPassword()
-    {
-        return $this->sandi; // Menggunakan 'sandi' sebagai atribut untuk otentikasi
-    }
-    public function setPasswordAttribute($value)
-    {
-        $this->attributes['sandi'] = decrypt($value);
-    }
+
     public function getJWTIdentifier()
     {
         return $this->getKey();

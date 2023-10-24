@@ -20,7 +20,7 @@ class UsersTableSeeder extends Seeder
             DB::table('users')->insert([
                 'nama' => $faker->name,
                 'email' => $faker->unique()->safeEmail,
-                'sandi' => Hash::make('password'), // Sandi default: 'password'
+                'password' => Hash::make('password'), // Sandi default: 'password'
                 'created_at' => \Carbon\Carbon::now(),
                 'updated_at' => \Carbon\Carbon::now(),
             ]);
