@@ -13,12 +13,10 @@ class UserController extends Controller
 {
     public function login(Request $request)
     {
-        $credentials = $request->only(['email', 'sandi']);
+        $credentials = $request->only(['email', 'password']);
 
         // if ($token= Auth::attempt($credentials)) {
         //     $user = Auth::user();
-
-
         //     return response()->json(['token' => $token], 200);
         // } else {
         //     return response()->json(['message' => 'Unauthorized'], 401);
@@ -28,15 +26,23 @@ class UserController extends Controller
             // dd($token);
             return response()->json(['message' => 'Invalid credentials'], 401);
         }
-        // return response()->json(['token' => $token], 200);
-        return $this->jsonResponse($token);
+            $user=auth()->user();
+            $userNotes = $user->UserNotes;
+        return response()->json([
+            'access_token' => $token,
+            'token_type'   => 'bearer',
+            'user' => $user,
+            'message' => 'Berhasil login',
+            'success' => true,
+            'status' => 201,
+        ], 201);
     }
     public function register(Request $request)
     {
         $validator = Validator::make($request->all(), [
             'nama' => 'required|string|max:255',
             'email' => 'required|string|max:255',
-            'sandi' => 'required|string|max:255',
+            'password' => 'required|string|max:255',
         ]);
 
         if ($validator->fails()) {
@@ -44,7 +50,7 @@ class UserController extends Controller
         }
         try {
             $requests = $request->all();
-            $requests['sandi'] = Hash::make($requests['sandi']);
+            $requests['password'] = Hash::make($requests['password']);
             $note = User::create($requests);
 
             return response()->json([
