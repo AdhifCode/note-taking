@@ -16,7 +16,8 @@ use App\Http\Controllers\NoteController;
 |
 */
 
-$router->group(['middleware' => 'App\Http\Middleware\CatatanMiddleware'], function ($router) {
+// $router->group(['middleware' => 'auth'], function ($router)
+$router->group(['prefix' => 'api'], function () use ($router) {
     $router->get('notes', 'NoteController@index');
     $router->post('notes', 'NoteController@store');
     $router->get('notes/{id}', 'NoteController@show');
