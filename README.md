@@ -80,16 +80,27 @@ Silakan sesuaikan contoh penggunaan endpoint dengan metode dan endpoint yang seb
 5. Otorisasi selalu diperiksa sebelum memproses permintaan terkait catatan.
 
 ## Parameter Request
-
+Parameter request yang utama adalah sebuah *note*
 ### Parameter Query
 
-- `param1`: Deskripsi parameter 1.
-- `param2`: Deskripsi parameter 2.
+- `id`: id dari note yang dibuat
+- `id_user`: id dari user
+- `judul`: judul dari catatan
+- `isi`: isi dari catatan
+- `tanggal`: tanggal catatan dibuat
+- `created_at`: tanggal dan waktu catatan dibuat
+- `updated_at`: tanggal diupdate.
 
 ### Parameter Body (Contoh Permintaan)
 
 ```json
-{
-  "param1": "nilai1",
-  "param2": "nilai2"
-}
+    {
+        "id": 2,
+        "id_user": 1,
+        "judul": "Sed in aliquid voluptatem officia nulla vel.",
+        "isi": "Molestias placeat ut aut velit. Aut mollitia possimus ut et. Dolorem facere aut dolores possimus nam eos.",
+        "tanggal": "2016-03-14",
+        "created_at": "2023-10-24T03:42:10.000000Z",
+        "updated_at": "2023-10-24T03:42:10.000000Z"
+    },
+```
