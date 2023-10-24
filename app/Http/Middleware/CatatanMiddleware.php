@@ -4,14 +4,12 @@ namespace App\Http\Middleware;
 
 use Tymon\JWTAuth\Facades\JWTAuth;
 use Closure;
+use Tymon\JWTAuth\Facades\JWTAuth;
 
 class CatatanMiddleware
 {
     public function handle($request, Closure $next)
     {
-        // if ($request->header('Authorization') !== 'Bearer TokenYangDiharapkan') {
-        //     return response('Tidak Boleh', 401);
-        // }
         try {
             $user = JWTAuth::parseToken()->authenticate();
         } catch (\Exception $e) {

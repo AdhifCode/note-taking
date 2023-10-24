@@ -59,6 +59,9 @@ $app->singleton(
 |
 */
 
+$app->alias('JWTAuth', 'Tymon\JWTAuth\Facades\JWTAuth');
+$app->alias('JWTFactory', 'Tymon\JWTAuth\Facades\JWTFactory');
+
 $app->configure('app');
 
 /*
@@ -98,6 +101,7 @@ $app->routeMiddleware([
 $app->register(App\Providers\AppServiceProvider::class);
 $app->register(App\Providers\AuthServiceProvider::class);
 $app->register(App\Providers\EventServiceProvider::class);
+$app->register(Tymon\JWTAuth\Providers\LumenServiceProvider::class);
 $app->register(Flipbox\LumenGenerator\LumenGeneratorServiceProvider::class);
 $app->register(Tymon\JWTAuth\Providers\LumenServiceProvider::class);
 
