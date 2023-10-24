@@ -13,6 +13,11 @@
 |
 */
 
+$app->group(['middleware' => 'App\Http\Middleware\AuthMiddleware'], function ($app) {
+    
+});
+
+
 $router->get('/', function () use ($router) {
     return $router->app->version();
 });
