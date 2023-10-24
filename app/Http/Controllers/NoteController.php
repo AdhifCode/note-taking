@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
 use App\Models\Note;
+use App\Models\User;
 use Illuminate\Database\QueryException;
 use Illuminate\Database\Eloquent\ModelNotFoundException;
 use Illuminate\Support\Facades\Validator;
@@ -14,6 +15,29 @@ class NoteController extends Controller
     {
         try {
             $notes = Note::all();
+            return response()->json([
+                'data' => $notes,
+                'message' => 'Berhasil ambil data',
+                'success' => true,
+                'status' => 201,
+            ], 201);
+        } catch (\Throwable $e) {
+            return response()->json([
+                'data' => null,
+                'message' => 'Terjadi kesalahan saat ambil data: ' . $e->getMessage(),
+                'success' => false,
+                'status' => 500,
+            ], 500);
+        }
+    }
+    public function usernotes($id)
+    {
+        try {
+            $notes = User::where('id', $id)->get();
+            foreach ($notes as $key => $note) {
+                $notes[$key]['user_notes']=$note->UserNotes;
+            }
+
             return response()->json([
                 'data' => $notes,
                 'message' => 'Berhasil ambil data',

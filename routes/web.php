@@ -1,4 +1,5 @@
 <?php
+
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\NoteController;
 
@@ -23,15 +24,20 @@ $router->group(['prefix' => 'api'], function () use ($router) {
     $router->put('notes/{id}', 'NoteController@update');
     $router->delete('notes/{id}', 'NoteController@destroy');
 });
+$router->get('usernotes/{id}', 'NoteController@usernotes');
+$router->group(['prefix' => 'api'], function ($router) {
+    $router->post('/login', 'UserController@login');
+});
 
+$router->post('/register', 'UserController@register');
 
 $router->get('/', function () use ($router) {
     return $router->app->version();
 });
 
-// $router->get('notes', 'NoteController@index');
-// $router->post('notes', 'NoteController@store');
-// $router->get('notes/{id}', 'NoteController@show');
-// $router->post('notes/{id}', 'NoteController@update');
-// $router->delete('notes/{id}', 'NoteController@destroy');
+$router->get('notes', 'NoteController@index');
+$router->post('notes', 'NoteController@store');
+$router->get('notes/{id}', 'NoteController@show');
+$router->post('notes/{id}', 'NoteController@update');
+$router->delete('notes/{id}', 'NoteController@destroy');
 
