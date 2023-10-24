@@ -28,9 +28,9 @@ $router->get('/', function () use ($router) {
     return $router->app->version();
 });
 
-// $router->get('notes', 'NoteController@index');
-// $router->post('notes', 'NoteController@store');
-// $router->get('notes/{id}', 'NoteController@show');
-// $router->put('notes/{id}', 'NoteController@update');
-// $router->delete('notes/{id}', 'NoteController@destroy');
+$router->get('notes', 'NoteController@index');
+$router->post('notes', 'NoteController@store');
+$router->get('notes/{id}', 'NoteController@show');
+$router->post('notes/{id}', 'NoteController@update');
+$router->delete('notes/{id}', 'NoteController@destroy');
 
