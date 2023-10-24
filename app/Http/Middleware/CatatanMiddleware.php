@@ -8,9 +8,9 @@ class CatatanMiddleware
 {
     public function handle($request, Closure $next)
     {
-        if ($request->header('Authorization') !== 'TokenYangDiharapkan') {
-            return response('Tidak Boleh', 401);
-        }
+        // if ($request->header('Authorization') !== 'Bearer TokenYangDiharapkan') {
+        //     return response('Tidak Boleh', 401);
+        // }
 
         return $next($request);
     }

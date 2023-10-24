@@ -8,8 +8,9 @@ use Illuminate\Contracts\Auth\Authenticatable as AuthenticatableContract;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 use Laravel\Lumen\Auth\Authorizable;
+use Tymon\JWTAuth\Contracts\JWTSubject;
 
-class User extends Model implements AuthenticatableContract, AuthorizableContract
+class User extends Model implements AuthenticatableContract, AuthorizableContract, JWTSubject
 {
     use Authenticatable, Authorizable, HasFactory;
 
@@ -21,7 +22,7 @@ class User extends Model implements AuthenticatableContract, AuthorizableContrac
     protected $table = 'users';
     protected $primaryKey = 'id';
     protected $fillable = [
-        'name', 'email',
+        'nama', 'email', 'sandi'
     ];
 
     /**
@@ -30,6 +31,33 @@ class User extends Model implements AuthenticatableContract, AuthorizableContrac
      * @var string[]
      */
     protected $hidden = [
-        'password',
+        'sandi',
     ];
+    public function getAuthPassword()
+    {
+        return $this->sandi; // Menggunakan 'sandi' sebagai atribut untuk otentikasi
+    }
+    public function setPasswordAttribute($value)
+    {
+        $this->attributes['sandi'] = decrypt($value);
+    }
+    public function getJWTIdentifier()
+    {
+        return $this->getKey();
+    }
+
+    /**
+     * Return a key value array, containing any custom claims to be added to the JWT.
+     *
+     * @return array
+     */
+    public function getJWTCustomClaims()
+    {
+        return [];
+    }
+
+    public function UserNotes()
+    {
+        return $this->hasMany(Note::class, 'id_user', 'id');
+    }
 }
