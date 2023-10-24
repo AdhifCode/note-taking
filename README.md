@@ -52,6 +52,7 @@ Aplikasi API ini bertujuan memberikan layanan manajemen catatan pengguna dengan 
 
 ### Contoh Penggunaan Endpoint
 
+```bash
 - **Mendaftar Pengguna Baru:**
 curl -X POST https://api.example.com/api/users -d '{"nama": "Nama Pengguna", "email": "pengguna@example.com", "sandi": "kata_sandi"}'
 
@@ -66,8 +67,17 @@ curl -X PUT -H "Authorization: Bearer <token>" https://api.example.com/api/notes
 
 - **Menghapus Catatan:**
 curl -X DELETE -H "Authorization: Bearer <token>" https://api.example.com/api/notes/1
+```
 
 Silakan sesuaikan contoh penggunaan endpoint dengan metode dan endpoint yang sebenarnya yang digunakan dalam API Anda. Pastikan untuk memberikan informasi yang cukup untuk memandu pengguna melalui penggunaan endpoint secara praktis.
+
+## Contoh Aliran Kerja Pengguna
+
+1. Pengguna mendaftar atau masuk ke dalam sistem.
+2. Setelah masuk, pengguna dapat membuat catatan baru melalui `/api/notes` endpoint. Data catatan mencatat pengguna yang membuatnya.
+3. Pengguna dapat melihat daftar catatan mereka dengan mengakses `/api/notes`, yang mengembalikan catatan yang hanya dimilikinya.
+4. Pengguna dapat memperbarui atau menghapus catatan mereka dengan mengirimkan permintaan ke `/api/notes/{note_id}`.
+5. Otorisasi selalu diperiksa sebelum memproses permintaan terkait catatan.
 
 ## Parameter Request
 
